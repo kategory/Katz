@@ -3,6 +3,7 @@ package arrow.typeclasses
 import arrow.core.Const
 import arrow.core.Either
 import arrow.core.Endo
+import arrow.core.Eval
 import arrow.core.None
 import arrow.core.Option
 import arrow.core.Validated
@@ -139,6 +140,8 @@ interface Monoid<A> : Semigroup<A> {
 
     private object AndMonoid : Monoid<Boolean> {
       override fun Boolean.combine(b: Boolean): Boolean = this && b
+      override fun Boolean.combineLazy(b: Eval<Boolean>): Eval<Boolean> =
+        if (this) b else Eval.now(false)
       override fun empty(): Boolean = true
     }
 

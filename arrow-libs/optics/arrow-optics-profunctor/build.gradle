@@ -1,0 +1,23 @@
+plugins {
+    id "org.jetbrains.kotlin.multiplatform"
+    id "org.jlleitschuh.gradle.ktlint"
+}
+
+apply from: "$SUB_PROJECT_MPP"
+apply from: "$TEST_COVERAGE"
+apply from: "$DOC_CREATION"
+apply from: "$PUBLICATION_MPP"
+apply from: "$ANIMALSNIFFER_MPP"
+
+kotlin {
+    sourceSets {
+        all.dependencies {
+            implementation kotlin('stdlib-common')
+        }
+        commonMain {
+            dependencies {
+                api project(":arrow-core")
+            }
+        }
+    }
+}

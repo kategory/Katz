@@ -3,6 +3,7 @@ package arrow.typeclasses
 import arrow.core.Const
 import arrow.core.Either
 import arrow.core.Endo
+import arrow.core.Eval
 import arrow.core.Ior
 import arrow.core.NonEmptyList
 import arrow.core.Option
@@ -23,6 +24,9 @@ interface Semigroup<A> {
 
   fun A.maybeCombine(b: A?): A =
     b?.let { combine(it) } ?: this
+
+  fun A.combineLazy(b: Eval<A>): Eval<A> =
+    b.map { b -> this.combine(b) }
 
   companion object {
     @JvmStatic

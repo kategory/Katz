@@ -44,9 +44,11 @@ project(":arrow-fx-stm").projectDir = file("fx/arrow-fx-stm")
 
 // Optics
 include 'arrow-optics'
+include 'arrow-optics-profunctor'
 include 'arrow-optics-test'
 
 project(":arrow-optics").projectDir = file("optics/arrow-optics")
+project(":arrow-optics-profunctor").projectDir = file("optics/arrow-optics-profunctor")
 project(":arrow-optics-test").projectDir = file("optics/arrow-optics-test")
 
 // Ank
