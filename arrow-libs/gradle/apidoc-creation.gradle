@@ -16,25 +16,26 @@
 
 apply plugin: "org.jetbrains.dokka"
 
-//dokka log spam `Can't find node by signature` comes from https://github.com/Kotlin/dokka/issues/269
-dokka {
-    outputFormat = 'jekyll'
-    outputDirectory = "${rootDir}/../arrow-site/docs/apidocs"
-    configuration {
-        includes = ['README.md']
-        reportUndocumented = false
-        // Specifies the location of the project source code on the Web.
-        // If provided, Dokka generates "source" links for each declaration.
-        // Repeat for multiple mappings
-        sourceLink {
-            // Source directory
-            path = "src/main/kotlin"
+dokkaJekyll {
+    enabled = file("README.md").exists()
+    outputDirectory = file("${rootDir}/../arrow-site/docs/apidocs")
+    dokkaSourceSets {
+        main {
+            includes.from(files("README.md"))
+            reportUndocumented.set(false)
+            // Specifies the location of the project source code on the Web.
+            // If provided, Dokka generates "source" links for each declaration.
+            // Repeat for multiple mappings
+            sourceLink {
+                // Source directory
+                localDirectory.set(file("src/commonMain/kotlin"))
 
-            // URL showing where the source code can be accessed through the web browser
-            url = "https://github.com/arrow-kt/arrow/blob/main/${relativeProjectPath('src/main/kotlin')}"
+                // URL showing where the source code can be accessed through the web browser
+                remoteUrl.set(uri("https://github.com/arrow-kt/arrow/blob/main/${relativeProjectPath('src/main/kotlin')}").toURL())
 
-            // Suffix which is used to append the line number to the URL. Use #L for GitHub
-            lineSuffix = "#L"
+                // Suffix which is used to append the line number to the URL. Use #L for GitHub
+                remoteLineSuffix.set("#L")
+            }
         }
     }
 }

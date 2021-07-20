@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-        java: [8, 11, 13, 15]
+        java: [8, 11, 13, 15, 16]
     name: Verify compilation with JDK ${{ matrix.java }} on ${{ matrix.os }}
     timeout-minutes: 60
 

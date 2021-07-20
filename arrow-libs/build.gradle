@@ -20,7 +20,7 @@ plugins {
 apply from: "gradle/$ROOT_PROJECT"
 
 task generateDoc(type: Exec) {
-  commandLine "sh", "gradlew", "dokka"
+  commandLine "sh", "gradlew", "dokkaJekyll"
 }
 
 task runValidation(type: Exec) {
